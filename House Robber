@@ -1,0 +1,19 @@
+int maxMoneyLooted(vector<int> &houses, int n)
+{
+	/*
+		Write your code here.
+		Don't write main().
+	 	Don't take input, it is passed as function argument.
+	 	Don't print output.
+	 	Taking input and printing output is handled automatically.
+	*/
+    int prev = houses[0], prev2 = 0;
+    for(int i = 1; i < n; i++) {
+        int pick = houses[i] + prev2;
+        int notPick = prev;
+        int curr = max(pick, notPick);
+        prev2 = prev;
+        prev = curr;
+    }
+    return prev;
+}
