@@ -1,0 +1,44 @@
+/**********************************************************
+
+    Following is the Binary Tree Node class structure:
+
+    template <typename T>
+
+    class BinaryTreeNode {
+    public :
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+		
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+***********************************************************/
+vector<int> preorder(BinaryTreeNode<int> *root) {
+    vector<int> v;
+    if(root == NULL)
+        return v;
+    stack<BinaryTreeNode<int> *> st;
+    st.push(root);
+    while(!st.empty()){
+        root = st.top();
+        st.pop();
+        v.push_back(root->data);
+        if(root->right != NULL)
+            st.push(root->right);
+        if(root->left != NULL)
+            st.push(root->left);
+    }
+    return v;
+}
+bool identicalTrees(BinaryTreeNode<int>* root1, BinaryTreeNode<int>* root2) {
+    // Write your code here.
+    if(root1 == NULL || root2 == NULL)
+        return root1 == root2;
+    return (root1->data == root2->data && identicalTrees(root1->right, root2->right) && identicalTrees(root1->left, root2->left));
+    
+}
